@@ -256,27 +256,31 @@
   .proj-card[data-hidden="true"] { display: none; }
 
   /* ── Modal ── */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(6px);
-    overflow-y: auto;
+ .modal {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  /* ✅ Yeh 3 lines add karo */
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
   }
   .modal-box {
-    background: #ffffff;
-    color: #1f2937;
-    width: 520px;
-    max-width: 92%;
-    margin: 40px auto;
-    padding: 30px 28px;
-    border-radius: 16px;
-    position: relative;
-    animation: popup 0.3s ease;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
+  /* margin: 40px auto 60px;  ❌ yeh hatao */
+  margin: 0;  /* ✅ yeh lagao */
+  max-height: 85vh;
+  overflow-y: auto;
+  width: 580px;
+  max-width: 94%;
+  /* ... baaki sab same rahega */
+}
   @keyframes popup {
     from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
