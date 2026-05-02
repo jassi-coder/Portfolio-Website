@@ -1076,50 +1076,56 @@
 </form>  
   <script>
 
-document.getElementById("contactForm")
-.addEventListener("submit", function(e){
+<script>
 
-    e.preventDefault(); // page reload stop
+document.getElementById("contactForm")
+.addEventListener("submit", async function(e){
+
+    e.preventDefault();
 
     const data = {
         name: document.getElementById("ctName").value,
         email: document.getElementById("ctEmail").value,
         subject: document.getElementById("ctSubject").value,
-        message: document.getElementById("ctMessage").value,
+        message: document.getElementById("ctMessage").value
     };
 
-    fetch("/contact/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": getCSRFToken()
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(response => {
+    try{
 
-        if(response.status === "success"){
-            alert("Message Sent Successfully");
-            document.getElementById("contactForm").reset();
+        const response = await fetch("/contact/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCSRFToken()
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        console.log(result);   // ⭐ IMPORTANT DEBUG
+
+        if(result.status === "success"){
+            alert("Message Sent Successfully ✅");
+            contactForm.reset();
         }else{
-            alert("Something went wrong ❌");
+            alert(result.message);
         }
 
-    })
-    .catch(error => {
-        console.error(error);
-        alert("Server Error ❌");
-    });
+    }catch(err){
+        console.error(err);
+        alert("Network Error ❌");
+    }
 
 });
 
 
 function getCSRFToken(){
-    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const token = document.querySelector('[name=csrfmiddlewaretoken]');
+    return token ? token.value : "";
 }
 
-</script>
+</script></script>
 </div>
   </div>
 </section>
