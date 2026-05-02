@@ -76,7 +76,6 @@
 
   section {
   width:100%;
-  overflow:hidden;
 }
 
   /* ── Tags ── */
@@ -231,7 +230,7 @@
   .proj-filter-btn:hover { color: #5b4ef5; background: #eef2ff; }
   .proj-filter-btn.active { background: linear-gradient(135deg, #5b4ef5, #818cf8); color: #fff; box-shadow: 0 4px 14px rgba(91,78,245,0.3); }
   .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; align-items: start; }
-  .proj-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(91,78,245,0.08); border: 1px solid #e8eaf6; transition: transform 0.3s ease, box-shadow 0.3s ease; opacity: 0; transform: translateY(24px); }
+  .proj-card { background: #fff; border-radius: 18px;  box-shadow: 0 6px 30px rgba(91,78,245,0.08); border: 1px solid #e8eaf6; transition: transform 0.3s ease, box-shadow 0.3s ease; opacity: 0; transform: translateY(24px); }
   .proj-card.proj-visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease; }
   .proj-card:hover { transform: translateY(-7px); box-shadow: 0 18px 50px rgba(91,78,245,0.22); }
   .proj-img-wrap { position: relative; overflow: hidden; height: 190px; }
@@ -834,7 +833,10 @@
 
 </div>
 
-<!-- PROJECT MODAL — bahar grid se -->
+
+</section>
+
+ <!-- PROJECT MODAL — bahar grid se -->
 <div id="projectModal" class="modal">
   <div class="modal-box">
     <span class="close-btn">&times;</span>
@@ -848,7 +850,6 @@
     <p id="modalImpact"></p>
   </div>
 </div>
-</section>
 
 <!-- STATS -->
 <section class="stats-section py-5" data-aos="fade-up">
