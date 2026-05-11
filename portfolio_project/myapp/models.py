@@ -38,6 +38,13 @@ class Experience(models.Model):
     technologies = models.CharField(max_length=300)
     achievements = models.TextField(help_text="Separate using |")
 
+    def tech_list(self):
+        return [t.strip() for t in self.technologies.split(',') if t.strip()]
+
+    def achievements_list(self):
+        return [a.strip() for a in self.achievements.split('|') if a.strip()]
+
+
     def __str__(self):
         return self.company_name
     
