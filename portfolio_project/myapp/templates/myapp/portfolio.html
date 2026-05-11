@@ -694,7 +694,7 @@
 
 <!-- ✅ Technologies -->
 <div class="exp-tech-badges">
-{% for tech in exp.tech_list %}
+{% for tech in exp._tech_list %}
 <span class="exp-tech-badge">{{ tech }}</span>
 {% endfor %}
 </div>
@@ -702,7 +702,7 @@
 <!-- ✅ Achievements -->
 <div class="exp-achievements">
 
-{% for item in exp.achievements_list %}
+{% for item in exp._achievements_list %}
 <div class="exp-ach-item">
 ✔ {{ item }}
 </div>
