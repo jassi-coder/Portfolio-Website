@@ -25,8 +25,8 @@ def home(request):
     live_projects = LiveProject.objects.all()
 
     for exp in experiences:
-        exp._tech_list = [t.strip() for t in exp.technologies.split(',') if t.strip()]
-        exp._achievements_list = [a.strip() for a in exp.achievements.split('|') if a.strip()]
+        exp.tech_list = [t.strip() for t in exp.technologies.split(',') if t.strip()]
+        exp.achievements_list = [a.strip() for a in exp.achievements.split('|') if a.strip()]
 
     return render(request, 'myapp/portfolio.html', {
         'about': about,
