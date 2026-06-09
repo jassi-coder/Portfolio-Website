@@ -1,6 +1,7 @@
-Django
-gunicorn
-whitenoise
-psycopg2-binary
-python-dotenv
-sendgrid
+Django==4.2.7
+gunicorn==21.2.0
+whitenoise==6.6.0
+psycopg2-binary==2.9.9
+python-dotenv==1.0.0
+sendgrid==6.11.0
+Pillow==10.1.0
