@@ -28,7 +28,7 @@
     box-sizing: border-box;
   }
   /* ── Base ── */
-  html,body { font-family: 'Poppins', sans-serif; background: #0f172a; color: #fff;background:#0f172a !important; display: flex;flex-direction: column;}
+  html,body { font-family: 'Poppins', sans-serif; background: #0f172a; color: #fff;background:#0f172a !important; display: flex;flex-direction: column;overflow-x:hidden !important;}
 
   .container,
 .container-fluid {
@@ -76,7 +76,8 @@
 
   section {
   width:100%;
-  overflow:hidden;
+   overflow-x:hidden;
+   max-width:100%;
 }
 
   /* ── Tags ── */
@@ -231,7 +232,7 @@
   .proj-filter-btn:hover { color: #5b4ef5; background: #eef2ff; }
   .proj-filter-btn.active { background: linear-gradient(135deg, #5b4ef5, #818cf8); color: #fff; box-shadow: 0 4px 14px rgba(91,78,245,0.3); }
   .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; align-items: start; }
-  .proj-card { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 6px 30px rgba(91,78,245,0.08); border: 1px solid #e8eaf6; transition: transform 0.3s ease, box-shadow 0.3s ease; opacity: 0; transform: translateY(24px); }
+  .proj-card { background: #fff; border-radius: 18px;overflow-x:hidden;  box-shadow: 0 6px 30px rgba(91,78,245,0.08); border: 1px solid #e8eaf6; transition: transform 0.3s ease, box-shadow 0.3s ease; opacity: 0; transform: translateY(24px); }
   .proj-card.proj-visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s ease; }
   .proj-card:hover { transform: translateY(-7px); box-shadow: 0 18px 50px rgba(91,78,245,0.22); }
   .proj-img-wrap { position: relative; overflow: hidden; height: 190px; }
@@ -256,97 +257,131 @@
   .proj-card[data-hidden="true"] { display: none; }
 
   /* ── Modal ── */
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(6px);
-    overflow-y: auto;
-  }
-  .modal-box {
-    background: #ffffff;
-    color: #1f2937;
-    width: 520px;
-    max-width: 92%;
-    margin: 40px auto;
-    padding: 30px 28px;
-    border-radius: 16px;
-    position: relative;
-    animation: popup 0.3s ease;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-  }
-  @keyframes popup {
-    from { transform: scale(0.9); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
-  }
-  .close-btn {
-    position: absolute;
-    right: 16px;
-    top: 12px;
-    font-size: 20px;
-    cursor: pointer;
-    color: #6b7280;
-    line-height: 1;
-  }
-  .close-btn:hover { color: #1a1a2e; }
-  .modal-box h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 1.3rem;
-    color: #1a1a2e;
-    margin: 0 0 12px;
-    padding-right: 24px;
-    line-height: 1.3;
-  }
-  .modal-box h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: #1a1a2e;
-    margin: 18px 0 8px;
-  }
-  .modal-box p {
-    font-size: 0.85rem;
-    color: #6b7280;
-    line-height: 1.7;
-    margin-bottom: 6px;
-  }
-  .modal-tags { margin: 0 0 14px; display: flex; flex-wrap: wrap; gap: 6px; }
-  .modal-tags span {
-    background: #eef2ff;
-    color: #4f46e5;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    border: 1px solid rgba(79,70,229,0.2);
-  }
-  .modal-box ul {
-    padding-left: 0;
-    margin: 0;
-    list-style: none;
-  }
-  .modal-box ul li {
-    font-size: 0.83rem;
-    color: #6b7280;
-    padding: 4px 0 4px 16px;
-    position: relative;
-    line-height: 1.5;
-    margin-bottom: 2px;
-  }
-  .modal-box ul li::before {
-    content: '•';
-    position: absolute;
-    left: 0;
-    color: #5b4ef5;
-    font-size: 1rem;
-  }
-  #modalImpact { margin-top: 14px; font-size: 0.85rem; color: #374151; }
-  #modalImpact strong { color: #1a1a2e; }
-
-  /* ── Skills ── */
+/* ── Modal ── */
+.modal {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal.modal-open {
+  display: flex !important;
+ align-items: center; 
+ justify-content: center;
+}
+.modal-box {
+  background: #ffffff;
+  color: #1f2937;
+  width: 580px;
+  max-width: 94%;
+  max-height: 85vh;
+  overflow-y: auto;
+  margin: 0;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+  animation: popup 0.3s ease;
+}
+@keyframes popup {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+.close-btn {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #6b7280;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s, color 0.2s;
+  z-index: 1;
+}
+.close-btn:hover { background: #f3f4f6; color: #1a1a2e; }
+.modal-box h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: #1a1a2e;
+  margin: 0 0 12px;
+  padding: 28px 28px 0;
+  padding-right: 40px;
+  line-height: 1.3;
+}
+.modal-box h3 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #1a1a2e;
+  margin: 18px 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.modal-box p {
+  font-size: 0.85rem;
+  color: #6b7280;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+.modal-tags {
+  margin: 0 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 0 28px;
+}
+.modal-tags span {
+  background: #eef2ff;
+  color: #4f46e5;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid rgba(79,70,229,0.2);
+}
+.modal-content-inner {
+  padding: 0 28px 28px;
+}
+.modal-box ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+}
+.modal-box ul li {
+  font-size: 0.83rem;
+  color: #6b7280;
+  padding: 4px 0 4px 16px;
+  position: relative;
+  line-height: 1.5;
+  margin-bottom: 2px;
+}
+.modal-box ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #5b4ef5;
+  font-size: 1rem;
+}
+#modalImpact {
+  margin-top: 16px;
+  background: #f5f6ff;
+  border-left: 3px solid #5b4ef5;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: #374151;
+}
+#modalImpact strong { color: #1a1a2e; }  /* ── Skills ── */
   .skill-item { display:flex; align-items:center; gap:12px; padding:10px 14px; border-radius:10px; margin-bottom:10px; background:#f9fafb; border:1px solid #e5e7f0; font-size:0.87rem; color:#374151; font-weight:500; transition:transform 0.2s, box-shadow 0.2s; }
   .skill-item:hover { transform:translateX(5px); box-shadow:0 4px 14px rgba(91,78,245,0.1); background:#fff; }
   .skill-icon { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; }
@@ -486,6 +521,8 @@
 /* cards hover effect */
 #skills .container > div > div{
     transition:.35s ease;
+ overflow-x:hidden;
+ max-width: 100%;
 }
 
 #skills .container > div > div:hover{
@@ -684,7 +721,7 @@
 <section class="stats-section py-5" data-aos="fade-up">
   <div class="container">
     <div class="row g-4 text-center">
-      <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="3" data-suffix="+">0+</span></h3><p>Years Experience</p></div></div>
+      <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="0" data-suffix="+">0+</span></h3><p>Years Experience</p></div></div>
       <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="15" data-suffix="+">0+</span></h3><p>Projects Delivered</p></div></div>
       <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="10" data-suffix="+">0+</span></h3><p>Happy Clients</p></div></div>
       <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="45" data-suffix="%">0%</span></h3><p>Avg. Improvement</p></div></div>
@@ -800,7 +837,10 @@
 
 </div>
 
-<!-- PROJECT MODAL — bahar grid se -->
+
+</section>
+
+ <!-- PROJECT MODAL — bahar grid se -->
 <div id="projectModal" class="modal">
   <div class="modal-box">
     <span class="close-btn">&times;</span>
@@ -814,13 +854,12 @@
     <p id="modalImpact"></p>
   </div>
 </div>
-</section>
 
 <!-- STATS -->
 <section class="stats-section py-5" data-aos="fade-up">
   <div class="container">
     <div class="row g-4 text-center">
-      <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="3" data-suffix="+">0+</span></h3><p>Years Experience</p></div></div>
+      <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="0" data-suffix="+">0+</span></h3><p>Years Experience</p></div></div>
       <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="15" data-suffix="+">0+</span></h3><p>Projects Delivered</p></div></div>
       <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="10" data-suffix="+">0+</span></h3><p>Happy Clients</p></div></div>
       <div class="col-6 col-md-3"><div class="stat-box"><h3><span class="counter" data-target="45" data-suffix="%">0%</span></h3><p>Avg. Improvement</p></div></div>
@@ -1037,47 +1076,52 @@
 </form>  
   <script>
 
-document.getElementById("contactForm")
-.addEventListener("submit", function(e){
 
-    e.preventDefault(); // page reload stop
+document.getElementById("contactForm")
+.addEventListener("submit", async function(e){
+
+    e.preventDefault();
 
     const data = {
         name: document.getElementById("ctName").value,
         email: document.getElementById("ctEmail").value,
         subject: document.getElementById("ctSubject").value,
-        message: document.getElementById("ctMessage").value,
+        message: document.getElementById("ctMessage").value
     };
 
-    fetch("/contact/", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": getCSRFToken()
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(response => {
+    try{
 
-        if(response.status === "success"){
-            alert("Message Sent Successfully");
-            document.getElementById("contactForm").reset();
+        const response = await fetch("/contact/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCSRFToken()
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        console.log(result);   // ⭐ IMPORTANT DEBUG
+
+        if(result.status === "success"){
+            alert("Message Sent Successfully ✅");
+            contactForm.reset();
         }else{
-            alert("Something went wrong ❌");
+            alert(result.message);
         }
 
-    })
-    .catch(error => {
-        console.error(error);
-        alert("Server Error ❌");
-    });
+    }catch(err){
+        console.error(err);
+        alert("Network Error ❌");
+    }
 
 });
 
 
 function getCSRFToken(){
-    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const token = document.querySelector('[name=csrfmiddlewaretoken]');
+    return token ? token.value : "";
 }
 
 </script>
@@ -1352,41 +1396,41 @@ function getCSRFToken(){
     }
   };
 
-  const modal = document.getElementById("projectModal");
+ const modal = document.getElementById("projectModal");
 
-  document.querySelectorAll(".proj-view-btn").forEach(btn => {
-    btn.addEventListener("click", function(e) {
-      e.preventDefault();
-      const card = this.closest(".proj-card");
-      const title = card.querySelector(".proj-card-title").innerText.trim();
-      const data = projectData[title];
-      if (!data) return;
+document.querySelectorAll(".proj-view-btn").forEach(btn => {
+  btn.addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    const card = this.closest(".proj-card");
+    const title = card.querySelector(".proj-card-title").innerText.trim();
+    const data = projectData[title];
+    if (!data) return;
 
-      document.getElementById("modalTitle").innerText = title;
-      document.getElementById("modalDesc").innerText = data.desc;
-      document.getElementById("modalTags").innerHTML = data.tags.map(t => `<span>${t}</span>`).join("");
-      document.getElementById("modalFeatures").innerHTML = data.features.map(f => `<li>${f}</li>`).join("");
-      document.getElementById("modalTech").innerHTML = data.tech.map(t => `<li>${t}</li>`).join("");
-      const impactEl = document.getElementById("modalImpact");
-      impactEl.innerHTML = data.impact ? `<strong>Impact:</strong> ${data.impact}` : "";
+    document.getElementById("modalTitle").innerText = title;
+    document.getElementById("modalDesc").innerText = data.desc;
+    document.getElementById("modalTags").innerHTML = data.tags.map(t => `<span>${t}</span>`).join("");
+    document.getElementById("modalFeatures").innerHTML = data.features.map(f => `<li>${f}</li>`).join("");
+    document.getElementById("modalTech").innerHTML = data.tech.map(t => `<li>${t}</li>`).join("");
+    const impactEl = document.getElementById("modalImpact");
+    impactEl.innerHTML = data.impact ? `<strong>Impact:</strong> ${data.impact}` : "";
 
-      modal.style.display = "block";
-      document.body.style.overflow = "hidden";
-    });
+    modal.classList.add("modal-open");
+    document.body.style.overflow = "hidden";
   });
+});
 
-  document.querySelector(".close-btn").onclick = () => {
-    modal.style.display = "none";
+document.querySelector(".close-btn").onclick = () => {
+  modal.classList.remove("modal-open");
+  document.body.style.overflow = "";
+};
+
+window.onclick = (e) => {
+  if (e.target === modal) {
+    modal.classList.remove("modal-open");
     document.body.style.overflow = "";
-  };
-  window.onclick = (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-      document.body.style.overflow = "";
-    }
-  };
-
-  /* Back to top */
+  }
+};  /* Back to top */
   const btt = document.getElementById('backToTop');
   window.addEventListener('scroll', () => { btt.classList.toggle('show', window.scrollY > 400); });
 </script>
